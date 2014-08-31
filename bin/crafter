@@ -4,10 +4,11 @@ require 'thor'
 
 class Crafter < Thor
 
-  desc 'thing', 'Will probably do things.'
-  def thing
-    puts "I'm doing a new thing. Probably"
+  desc 'install', 'Installs the Craftfile in this directory.'
+  def install
+    puts "I'll install things soon."
   end
+  default_task :install
 
 end
 
