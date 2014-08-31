@@ -1,13 +1,13 @@
 # Crafter
 
-TODO: Write a gem description
+It's like bundler for Minecraft instances.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'Crafter'
+gem 'crafter'
 ```
 
 And then execute:
