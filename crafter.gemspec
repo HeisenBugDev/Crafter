@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{TODO: Write a short summary. Required.}
   spec.description   = %q{TODO: Write a longer description. Optional.}
   spec.homepage      = ''
-  spec.license       = 'Copyright 2014 HeisenBugDev. All Rights Reserved.'
+  spec.license       = 'GNU Public License Version 3'
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
