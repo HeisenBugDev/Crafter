@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require 'thor'
+
+class Crafter < Thor
+
+  desc 'thing', 'Will probably do things.'
+  def thing
+    puts "I'm doing a new thing. Probably"
+  end
+
+end
+
+Crafter.start
