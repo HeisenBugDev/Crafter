@@ -1,7 +1,7 @@
 module Crafter
 
   class CraftfileError < RuntimeError; end
-  class Dsl
+  class DSL
 
     def initialize
 
