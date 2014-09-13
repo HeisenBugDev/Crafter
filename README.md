@@ -1,5 +1,10 @@
 # Crafter
 
+[![travis.ci Continuous Integration](http://img.shields.io/travis/HeisenBugDev/Crafter.svg?style=flat-square)](https://travis-ci.org/HeisenBugDev/Crafter)
+[![Inline docs](http://inch-ci.org/github/HeisenBugDev/Crafter.svg?branch=master&style=flat-square)](http://inch-ci.org/github/HeisenBugDev/Crafter)
+[![Code Climate GPA](http://img.shields.io/codeclimate/github/HeisenBugDev/Crafter.svg?style=flat-square)](https://codeclimate.com/github/HeisenBugDev/Crafter)
+[![Code Climate Test Coverage](http://img.shields.io/codeclimate/coverage/github/HeisenBugDev/Crafter.svg?style=flat-square)](https://codeclimate.com/github/HeisenBugDev/Crafter)
+
 It's like bundler for Minecraft instances.
 
 ## Installation
