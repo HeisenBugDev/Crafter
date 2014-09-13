@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+require 'thor'
+require_relative '../lib/crafter/filesystem'
+
+class Craft < Thor
+
+  desc 'create NAME', 'Creates a new Crafter instance.'
+  def create(name)
+    @type = ask '==> Client or Server?'
+    @minecraft = ask '==> Please specify Minecraft version:'
+  end
+
+end
+
+Craft.start
