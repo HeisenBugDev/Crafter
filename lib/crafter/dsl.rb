@@ -29,11 +29,32 @@ module Crafter
 
     end
 
+    # Only applicable to Minecraft < 1.8
     def bukkit(version)
 
     end
 
+    # Only applicable to Minecraft < 1.8
     def cauldron(version)
+
+    end
+
+    def canary(version)
+
+    end
+
+    # Only applicable to Minecraft > 1.8
+    def sponge(version)
+
+    end
+
+    # Only applicable to Minecraft < 1.6.4, I think...
+    def spout(version)
+
+    end
+
+    # Old Server Mod...
+    def hmod(version)
 
     end
 
