@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Crafter</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="js/classie.js"></script>
+        <script>
+            function menu() {
+                $("#sidenav").toggleClass("sidenav-active");
+            }
+        </script>
+    </head>
+    <body>
+        <div id="sidenav">
+            <ul>
+                <li>&nbsp;&nbsp;WHAT IT IS</li>
+                <li>&nbsp;&nbsp;HOW IT WORKS</li>
+                <li>&nbsp;&nbsp;MODPACKS</li>
+            </ul>
+        </div>
+        <div id="wrapper">
+            <div class="header"><img src="img/headerlogo.png" height="50" class="headerlogo"></img><span class="headertext">CRAFTER</span><span class="menu-opener" onclick="menu();">&#9776;</span></div>
+
+            <div id="banner" style="overflow-y:hidden;">
+                <img id="megalogo" src="img/whitelogo.svg"></img>
+        <h2>A MINECRAFT PACKAGE MANAGER</h2>
+            <img id="terminal" src="img/terminal.svg"></img>
+            </div>
+        </div>
+        <div id="one">
+            <div style="height:50px;"></div>
+            <h1>WHAT IT IS</h1>
+            <p>Crafter is a package manager. What is a package manager, you may ask? A package manager is a program that, well, manages packages&mdash;that is to say, it automates installing things. So, on Debian-based systems, instead of downloading and running the installer for GParted, you could run <code>sudo apt-get install gparted</code> in a terminal and your package manager will automagically download and install everything needed for GParted.</p>
+            <p>
+                How does this apply to Minecraft? Well, imagine that instead of digging through forums and wading through Adf.ly links, all you had to do to install a mod was <code>crafter install</code>. Would that be awesome? Of course! That is exactly what Crafter does. </p>
+            <img class="secondary-terminal" src="img/terminal.svg">
+        </div>
+        <div id="two">
+            <div style="height:50px;"></div>
+            <h1 style="color:white;">HOW IT WORKS</h1>
+            <p>Crafter hooks into a massive mod repository called <a href="http://heisenbugdev.com">HeisenBugDev</a>. Modders host their mods on HeisenBugDev so that they can be distributed more easily. Plus, the modders get a cut of the ad revenue.</p>
+            <p>Then, various launchers like Crafter hook into HeisenBugDev to get the mods needed. Crafter is different from all the others because it has a CLI and a GUI, which means that anyone can use the GUI to install mods, but superusers can use the more powerful CLI.</p>
+        </div>
+        <div id="three">
+            <div style="height:50px;"></div>
+            <h1>MODPACKS</h1>
+            <p>
+                By now, you're probably wondering: What about modpacks? We've come up with a fantstic system for that: Craftfiles. All you have to do to install a modpack is <code>crafter install &lt;modpack name></code>. Crafter will download the Craftfile, parse it, and download and configure all the required mods. Craftfile markup is the simplest possible: it's just Ruby!
+            </p>
+            <p>Remember that GUI we mentioned earlier? You can generate Craftfiles with it, too. Here's the markup: </p>
+            <p id="getabiggerscreen">Sorry, we can't display this code on a screen this small. Seriously, it would be unreadable. Come back with a bigger screen to view the code.</p>    
+            <pre><code class="ruby" id="craftfile">
+                minecraft '1.6.4'
+forge     '1234'
+          # Other options are "latest" or "recommended" (default)
+
+source 'heisenbugdev' # some sugar for http(s)://heisenbugdev.com
+source 'github://ZephireNZ@Quickmods/index.json' # A quickmod index (syntax is for MultiMC compat)
+source 'https://github.com/luacs1998/QuickModFiles' # This will automatically detect the index.json
+
+mod 'QuantumCraft' # gets latest QuantumCraft from heisenbugdev
+mod 'SpongesMod', '@1.6.4'
+                  # Any version for 1.6.4 (1.6 will match to 1.6.x)
+                  # Also valid would be '>=2.0.2' and other normal matchers
+                  # Defaults to current MC version (Ignore the last digit?)
+
+mod 'ProjectRed', github: 'MrTJP/ProjectRed', ref: 'v1.0'
+                                              # Ref can either be a git tag,
+                                              # commit, or branch
+
+# Aliased to rp
+resourcepack '', url: 'http://dropbox/.../bleh.zip'
+            </code></pre>
+        </div>
+        <div id="four">
+            <div style="height:4vh;"></div>
+            <span style="margin-left:10px;color:white;font-family:'Lato';margin-top:4vh;">&copy; k2b6s9j 2014 // Web design: mistertime</span>
+            <div style="float:right;">
+            <a href="http://heisenbugdev.com/"><img src="img/hbdfooter.svg" style="height:8vh;margin-top: -2.5vh;"></img></a></div>
+        </div>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>
