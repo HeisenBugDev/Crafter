@@ -11,6 +11,32 @@ class Craft < Thor
     @minecraft = ask '==> Please specify Minecraft version:'
   end
 
+  desc 'clone', 'Clones a Crafter instance.'
+  def clone(*options)
+    if options[0] && options[1]
+      # Clone instance to another instance
+      puts "==> Clone from \"#{options[0]}\" to \"#{options[1]}\""
+      puts '==> Cloning instance...'
+      puts "==> Instance clones (\"#{options[0]} -> \"#{options[1]}\""
+    elsif options[0]
+      # Clone instance from URL
+      puts '==> Unpacking...'
+      puts "==> Source specifies instance name: #{options[1]}"
+      @name = ask '    Enter a new name or leave blank, then press enter'
+      puts '==> Cloning instance...'
+      puts "==> Instance cloned (#{@downloaded} \"#{@original_name}\" -> \"#{@new_name}\")"
+    else
+      # Walk through clone
+      @name = ask '==> Please enter an instance name, gist id, or path to archive'
+      puts '==> Instance Selected:'
+      puts "--> Minecraft Version: #{@minecraft}"
+      puts "--> Mods: #{@mods}"
+      @new_name = ask 'Please enter a name for the clone'
+      puts 'Cloning Instance...'
+      puts "Instance cloned (\"#{@original_name}\" -> \"#{@new_name}\")"
+    end
+  end
+
 end
 
 Craft.start
