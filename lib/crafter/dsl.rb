@@ -22,40 +22,44 @@ module Crafter
     end
 
     def minecraft(version)
+      @minecraft = version
+    end
 
+    def type(executable = 'universal')
+      @type = executable
     end
 
     def forge(version)
-
+      @forge = version
     end
 
     # Only applicable to Minecraft < 1.8
     def bukkit(version)
-
+      @bukkit = version
     end
 
     # Only applicable to Minecraft < 1.8
     def cauldron(version)
-
+      @cauldron = version
     end
 
     def canary(version)
-
+      @canary = version
     end
 
     # Only applicable to Minecraft > 1.8
     def sponge(version)
-
+      @sponge = version
     end
 
     # Only applicable to Minecraft < 1.6.4, I think...
     def spout(version)
-
+      @spout = version
     end
 
     # Old Server Mod...
     def hmod(version)
-
+      @hmod = version
     end
 
     alias_method :mcpc, :cauldron
