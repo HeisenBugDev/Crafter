@@ -1,39 +1,83 @@
 #!/usr/bin/env ruby
 
 require 'thor'
-require_relative '../lib/crafter/filesystem'
+# require_relative '../lib/crafter/filesystem'
+
+def message(meth, message, color: [], arrow_color: nil)
+  message = [message].flatten.join("\n    ")
+  message << "\n    >" if meth == :ask
+  say('==> ', arrow_color || :blue)
+  send(meth, message, *([color].flatten + [:bold]))
+end
+
+def error_message(message)
+  message(:say, message, arrow_color: :red, color: :red)
+end
+
+# TFOSS  v1
+# GITHUB Homebrew/Homebrew
+# SHA    4ab83434b6776056dc2a063b6c48ce499000f4f8
+# PATH   /Library/Homebrew/utils.rb
+# LINES  162-181
+def puts_columns(items, star_items=[], indent=4)
+  return if items.empty?
+
+  if star_items && star_items.any?
+    items = items.map{|item| star_items.include?(item) ? "#{item}*" : item}
+  end
+
+  if $stdout.tty?
+    # determine the best width to display for different console sizes
+    console_width = `/bin/stty size`.chomp.split(" ").last.to_i - indent
+    console_width = 80 - indent if console_width <= 0
+    longest = items.sort_by { |item| item.length }.last
+    optimal_col_width = (console_width.to_f / (longest.length + 2).to_f).floor
+    cols = optimal_col_width > 1 ? optimal_col_width : 1
+
+    IO.popen("/usr/bin/pr -#{cols} -t -w#{console_width} -o#{indent}", "w"){|io| io.puts(items) }
+  else
+    puts items
+  end
+end
 
 class Craft < Thor
 
   desc 'create NAME', 'Creates a new Crafter instance.'
   def create(name)
-    @type = ask '==> Client or Server?'
-    @minecraft = ask '==> Please specify Minecraft version:'
+    loop do
+      @type = message(:ask, 'Client or Server?')
+      break if ['client', 'server'].include? @type.downcase
+      error_message('Invalid choice')
+    end
+
+    @minecraft = message(:ask, 'Please specify Minecraft version')
   end
 
   desc 'clone', 'Clones a Crafter instance.'
   def clone(*options)
     if options[0] && options[1]
+      # 0 is source name. 1 is clone name
       # Clone instance to another instance
-      puts "==> Clone from \"#{options[0]}\" to \"#{options[1]}\""
-      puts '==> Cloning instance...'
-      puts "==> Instance clones (\"#{options[0]} -> \"#{options[1]}\""
+      message(:say, "Clone from \"#{options[0]}\" to \"#{options[1]}\"")
+      message(:say, 'Cloning instance...')
+      message(:say, "Instance clones (\"#{options[0]} -> \"#{options[1]}\"")
     elsif options[0]
-      # Clone instance from URL
-      puts '==> Unpacking...'
-      puts "==> Source specifies instance name: #{options[1]}"
-      @name = ask '    Enter a new name or leave blank, then press enter'
-      puts '==> Cloning instance...'
-      puts "==> Instance cloned (#{@downloaded} \"#{@original_name}\" -> \"#{@new_name}\")"
+      # Clone from gist sha, gist url, url, file, or instance
+      message(:say, "Unpacking...")
+      @name = message(:ask, ["Source specifies instance name: \"#{options[1]}\"",
+        'Enter a new name or leave blank, then press enter'])
+      message(:say, 'Cloning instance...')
+      message(:say, "Instance cloned (#{@downloaded} \"#{@original_name}\" -> \"#{@new_name}\")")
     else
       # Walk through clone
-      @name = ask '==> Please enter an instance name, gist id, or path to archive'
-      puts '==> Instance Selected:'
-      puts "--> Minecraft Version: #{@minecraft}"
-      puts "--> Mods: #{@mods}"
-      @new_name = ask 'Please enter a name for the clone'
-      puts 'Cloning Instance...'
-      puts "Instance cloned (\"#{@original_name}\" -> \"#{@new_name}\")"
+      @name = message(:ask, 'Please enter an instance name, gist id, or path to archive')
+      message(:say, "Instance Selected: \"#{@original_name}\"")
+      message(:say, "MC #{@minecraft}") # Also show forge version and stuff
+      message(:say, "Mods:")
+      puts_columns(@mods)
+      @new_name = message(:ask, 'Please enter a name for the clone')
+      message(:say, 'Cloning Instance...')
+      message(:say, "Instance cloned (\"#{@original_name}\" -> \"#{@new_name}\")")
     end
   end
 
