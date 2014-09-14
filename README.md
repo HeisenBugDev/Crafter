@@ -5,27 +5,11 @@
 [![Code Climate GPA](http://img.shields.io/codeclimate/github/HeisenBugDev/Crafter.svg?style=flat-square)](https://codeclimate.com/github/HeisenBugDev/Crafter)
 [![Code Climate Test Coverage](http://img.shields.io/codeclimate/coverage/github/HeisenBugDev/Crafter.svg?style=flat-square)](https://codeclimate.com/github/HeisenBugDev/Crafter)
 
-It's like bundler for Minecraft instances.
+Bundler and homebrew inspired Minecraft launcher.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'crafter'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install Crafter
-
-## Usage
-
-TODO: Write usage instructions here
+No installation yet. It's not ready.
 
 ## Contributing
 
