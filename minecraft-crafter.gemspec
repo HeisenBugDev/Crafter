@@ -4,11 +4,11 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'crafter/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'crafter'
+  spec.name          = 'minecraft-crafter'
   spec.version       = Crafter::VERSION
   spec.authors       = ['Kepler Sticka-Jones']
   spec.email         = ['kbsj269@gmail.com']
-  spec.summary       = 'Crafters gets you from code to craft'
+  spec.summary       = 'Crafter gets you from code to craft'
   spec.description   = ''
   spec.homepage      = ''
   spec.license       = 'GNU Public License Version 3'
