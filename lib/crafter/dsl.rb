@@ -33,18 +33,18 @@ module Crafter
       @forge = version
     end
 
-    # Only applicable to Minecraft < 1.8
-    def bukkit(version)
-      @bukkit = version
-    end
-
-    # Only applicable to Minecraft < 1.8
-    def cauldron(version)
-      @cauldron = version
-    end
-
     def canary(version)
       @canary = version
+    end
+    
+    # Bukkit Replacement Binary, with it being legally impossible to get Bukkit binaries anymore.
+    def glowstone(version)
+      @glowstone = version
+    end
+    
+    # No Promises here. Might be cool one day.
+    def minecraftruby(version)
+      @minecraftruby = version
     end
 
     # Only applicable to Minecraft > 1.8
@@ -61,9 +61,6 @@ module Crafter
     def hmod(version)
       @hmod = version
     end
-
-    alias_method :mcpc, :cauldron
-    alias_method :mcpc_plus, :cauldron
 
     def source(location, options = {})
 
