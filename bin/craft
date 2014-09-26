@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'thor'
+require 'crafter'
 # require_relative '../lib/crafter/filesystem'
 
 def message(meth, message, color: [], arrow_color: nil)
@@ -41,6 +42,7 @@ def puts_columns(items, star_items=[], indent=4)
 end
 
 class Craft < Thor
+  prepend ::CLIOverrides
 
   desc 'create NAME', 'Creates a new Crafter instance.'
   def create(name)
@@ -74,6 +76,7 @@ class Craft < Thor
       message(:say, "Instance Selected: \"#{@original_name}\"")
       message(:say, "MC #{@minecraft}") # Also show forge version and stuff
       message(:say, "Mods:")
+
       puts_columns(@mods)
       @new_name = message(:ask, 'Please enter a name for the clone')
       message(:say, 'Cloning Instance...')
