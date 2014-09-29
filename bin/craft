@@ -2,7 +2,6 @@
 
 require 'thor'
 require 'crafter'
-# require_relative '../lib/crafter/filesystem'
 
 def message(meth, message, color: [], arrow_color: nil)
   message = [message].flatten.join("\n    ")
@@ -42,7 +41,7 @@ def puts_columns(items, star_items=[], indent=4)
 end
 
 class Craft < Thor
-  prepend ::CLIOverrides
+  prepend Crafter::CLIOverrides
 
   desc 'create NAME', 'Creates a new Crafter instance.'
   def create(name)
