@@ -45,13 +45,8 @@ class Craft < Thor
 
   desc 'create NAME', 'Creates a new Crafter instance.'
   def create(name)
-    loop do
-      @type = message(:ask, 'Client or Server?')
-      break if ['client', 'server'].include? @type.downcase
-      error_message('Invalid choice')
-    end
-
-    @minecraft = message(:ask, 'Please specify Minecraft version')
+    @type = ask('Client or Server?', valid: ['client', 'server'])
+    @minecraft = ask('Please specify Minecraft version')
   end
 
   desc 'clone', 'Clones a Crafter instance.'
