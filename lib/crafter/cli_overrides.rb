@@ -1,8 +1,14 @@
 module Crafter
   module CLIOverrides
-    def say(*args, superify: false)
+      #
+      # Say something! Use § characters around parts of text you have colorized
+      # @param *args [String] Arguments to pass to #low_say
+      # @param bold: true [Boolean] Enable or disable auto-bolding
+      # @param force_new_line: false [Boolean] Force new line?
+    def say(*args, superify: false, bold: true, force_new_line: false)
       return super *args if superify
-      arrow(colors: :blue); low_say(*args)
+      arrow(colors: :blue)
+      low_say(*args, bold: bold, force_new_line: force_new_line)
     end
 
     #
@@ -12,11 +18,11 @@ module Crafter
     #   An empty array will be ignored.
     #
     # @return [String] User response.
-    def ask(message, valid: [])
+    def ask(message, valid: [], bold: true, force_new_line: false)
       return loop_valid(message, valid) unless valid.empty?
       stringify_message!(message); arrow(colors: :blue)
       message << "\n    > "
-      low_say(message)
+      low_say(message, bold: bold, force_new_line: force_new_line)
       STDIN.gets
     end
 
@@ -41,12 +47,17 @@ module Crafter
       args_array << arg if arg
     end
 
-    def low_say(message,
-    colors: [], arrow_color: nil, bold: true, force_new_line: nil)
+    def low_say(message, colors: [], bold: true, force_new_line: nil)
       stringify_message!(message)
+      message = generate_bold_text(message) if bold
       conditional_arg!(args = [], force_new_line)
-      colors = ([colors] << (:bold if bold)).flatten.compact
       say(message, colors, *args, superify: true)
+    end
+
+    def generate_bold_text(text)
+      text.split('§').map do |string|
+        string.colorized? ? string : string.bold
+      end.join
     end
 
     def arrow(colors: [])

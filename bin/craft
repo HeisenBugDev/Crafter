@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'thor'
+require 'colorize'
 require 'crafter'
 
 def message(meth, message, color: [], arrow_color: nil)
@@ -53,10 +54,10 @@ class Craft < Thor
   def clone(*options)
     if options[0] && options[1]
       # 0 is source name. 1 is clone name
-      # Clone instance to another instance
-      message(:say, "Clone from \"#{options[0]}\" to \"#{options[1]}\"")
-      message(:say, 'Cloning instance...')
-      message(:say, "Instance clones (\"#{options[0]} -> \"#{options[1]}\"")
+      to_from_message = "(§#{options[0].underline}§ -> §#{options[1].underline}§)"
+      say("Clone instance #{to_from_message}")
+      say("Cloning instance...")
+      say("Instance cloned #{to_from_message}")
     elsif options[0]
       # Clone from gist sha, gist url, url, file, or instance
       message(:say, "Unpacking...")
