@@ -1,3 +1,5 @@
+require 'colorize'
+
 module Crafter
   module CLIHelpers
     #
@@ -31,8 +33,8 @@ module Crafter
       low_say(message, colors: :red)
     end
 
-    def from_to_message(from, to, source: nil)
-      "(#{source.dup << ' ' unless source.empty?}"\
+    def from_to_message(from, to, source: '')
+      "(§#{(source.dup << ' ').colorize(:default) unless source.empty?}§"\
       "§#{from.underline}§ -> §#{to.underline}§)"
     end
 
