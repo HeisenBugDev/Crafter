@@ -1,10 +1,10 @@
 module Crafter
-  module CLIOverrides
-      #
-      # Say something! Use § characters around parts of text you have colorized
-      # @param *args [String] Arguments to pass to #low_say
-      # @param bold: true [Boolean] Enable or disable auto-bolding
-      # @param force_new_line: false [Boolean] Force new line?
+  module CLIHelpers
+    #
+    # Say something! Use § characters around parts of text you have colorized
+    # @param *args [String] Arguments to pass to #low_say
+    # @param bold: true [Boolean] Enable or disable auto-bolding
+    # @param force_new_line: false [Boolean] Force new line?
     def say(*args, superify: false, bold: true, force_new_line: false)
       return super *args if superify
       arrow(colors: :blue)
@@ -31,6 +31,11 @@ module Crafter
       low_say(message, colors: :red)
     end
 
+    def from_to_message(from, to, source: nil)
+      "(#{source.dup << ' ' unless source.empty?}"\
+      "§#{from.underline}§ -> §#{to.underline}§)"
+    end
+
   private
 
     def loop_valid(message, valid)
@@ -55,6 +60,10 @@ module Crafter
     end
 
     def generate_bold_text(text)
+      if text.scan('§').length % 2 == 1
+        raise "There must be an even number of §'s in the message: #{text}"
+      end
+
       text.split('§').map do |string|
         string.colorized? ? string : string.bold
       end.join

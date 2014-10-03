@@ -42,7 +42,7 @@ def puts_columns(items, star_items=[], indent=4)
 end
 
 class Craft < Thor
-  prepend Crafter::CLIOverrides
+  prepend Crafter::CLIHelpers
 
   desc 'create NAME', 'Creates a new Crafter instance.'
   def create(name)
@@ -54,17 +54,20 @@ class Craft < Thor
   def clone(*options)
     if options[0] && options[1]
       # 0 is source name. 1 is clone name
-      to_from_message = "(§#{options[0].underline}§ -> §#{options[1].underline}§)"
-      say("Clone instance #{to_from_message}")
+      # from_to_message = "(§#{options[0].underline}§ -> §#{options[1].underline}§)"
+      from_to = from_to_message(options[0], options[1])
+      say("Clone instance #{from_to}")
       say("Cloning instance...")
-      say("Instance cloned #{to_from_message}")
+      say("Instance cloned #{from_to}")
     elsif options[0]
       # Clone from gist sha, gist url, url, file, or instance
-      message(:say, "Unpacking...")
-      @name = message(:ask, ["Source specifies instance name: \"#{options[1]}\"",
-        'Enter a new name or leave blank, then press enter'])
-      message(:say, 'Cloning instance...')
-      message(:say, "Instance cloned (#{@downloaded} \"#{@original_name}\" -> \"#{@new_name}\")")
+      say("Unpacking...")
+      @name = ask(["Source specifies instance name: §#{@original_name.underline}§",
+                   "Enter a new name or leave blank, then press enter"])
+      @name = @original_name if @name.empty?
+      from_to = from_to_message(@original_name, @name, source: @downloaded)
+      say('Cloning instance...')
+      say("Instance cloned #{from_to}")
     else
       # Walk through clone
       @name = message(:ask, 'Please enter an instance name, gist id, or path to archive')
