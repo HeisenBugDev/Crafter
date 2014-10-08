@@ -6,6 +6,7 @@ require 'crafter/version'
 Gem::Specification.new do |spec|
   spec.name          = 'minecraft-crafter'
   spec.version       = Crafter::VERSION
+  spec.version       = "#{spec.version}-#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS']
   spec.authors       = ['Kepler Sticka-Jones', 'Theron Boerner']
   spec.email         = ['kbsj269@gmail.com', 'hunterboerner@gmail.com']
   spec.summary       = 'Crafter gets you from code to craft'
