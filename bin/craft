@@ -44,6 +44,10 @@ end
 class Craft < Thor
   prepend Crafter::CLIHelpers
 
+  class << self
+    Crafter::FileSystem.create_folder_structure
+  end
+
   desc 'create NAME', 'Creates a new Crafter instance.'
   def create(name)
     @type = ask('Client or Server?', valid: ['client', 'server'])
