@@ -45,7 +45,7 @@ class Craft < Thor
   prepend Crafter::CLIHelpers
 
   class << self
-    Crafter::FileSystem.create_folder_structure
+    Crafter::FileSystem.base_directory_setup
   end
 
   desc 'create NAME', 'Creates a new Crafter instance.'
