@@ -52,7 +52,7 @@ class Craft < Thor
   def create(name)
     @type = ask('Client or Server?', valid: ['client', 'server'])
     @minecraft = ask('Please specify Minecraft version')
-    Crafter::FileSystem.create_instance_folder name, {type: @type, version: @minecraft}
+
   end
 
   desc 'clone', 'Clones a Crafter instance.'
