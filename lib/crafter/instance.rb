@@ -10,10 +10,24 @@ module Crafter
   end
 
   class Instance
-    attr_accessor :craftfile
+    attr_reader :craftfile
+    attr_reader :name
+    attr_reader :mods
 
     def initialize(name)
+      @mods = []
+      @name = name
       @craftfile = Crafter::FileSystem.instance_directory(name)[:craftfile]
+      InstanceCache.register_instance(self)
+    end
+
+    def add_mod(mod)
+      @mods << mods unless @mods.include? mod
+    end
+
+    def self.create(name)
+      instance = InstanceCache.find(name)
+      instance || self.new(name)
     end
 
     def delete
@@ -47,7 +61,15 @@ module Crafter
     end
 
     def find(name)
+      find_by(:name, name)
+    end
 
+    def find_by(key, value)
+      @instances.find { |instance| instance.send(key) == value }
+    end
+
+    def register_instance(instance)
+      @instances << instance
     end
 
     private
