@@ -3,23 +3,11 @@ rvm:
   - 2.1.1
   - jruby-head
 jdk:
-  - openjdk7
-  - oraclejdk7
   - oraclejdk8
 matrix:
-  exclude:
-    - rvm: 2.1.1
-      jdk: oraclejdk7
-    - rvm: 2.1.1
-      jdk: oraclejdk8
-    - rvm: rbx-2
-      jdk: oraclejdk7
-    - rvm: rbx-2
-      jdk: oraclejdk8
   allow_failures:
     - rvm:
       - jruby-head
-  fast_finish: true
 addons:
   code_climate:
     repo_token: 1/Xs50R6Od3PMq2aYqSv4baBEqk5dnVjd62eB2nEIIG94xhohOUoK7xsyQlP6AYdAPEYKeJbBnFEt/PUEq3Y04Jn4ny/DRuzT0e2GR1X1ckocKq1n/KRBXhcD+5h7ss/0Sl+r3x0TkiYrbfudBsLNf3TZx+svMmUXvW9ajOUnwo
