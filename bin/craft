@@ -54,7 +54,7 @@ class Craft < Thor
   def create(name)
     @type = ask('Client or Server?', valid: ['client', 'server'])
     @minecraft = ask('Please specify Minecraft version')
-
+    instance = Instance.create(name)
   end
 
   desc 'clone', 'Clones a Crafter instance.'

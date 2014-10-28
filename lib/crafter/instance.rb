@@ -14,20 +14,28 @@ module Crafter
     attr_reader :name
     attr_reader :mods
 
+    def self.create(name)
+      instance = InstanceCache.find(name)
+      instance || self.new(name)
+    end
+
+    def create_files(instance_hash)
+      File.touch(@craftfile)
+      Dir.mkdir(File.join(instance[:dir], 'worlds'))
+      Dir.mkdir(File.join(instance[:dir], 'config'))
+    end
+
     def initialize(name)
       @mods = []
       @name = name
-      @craftfile = Crafter::FileSystem.instance_directory(name)[:craftfile]
+      instance_hash = Crafter::FileSystem.instance_directory(name)
+      @craftfile = instance_hash[:craftfile]
+      create_files(instance_hash)
       InstanceCache.register_instance(self)
     end
 
     def add_mod(mod)
       @mods << mods unless @mods.include? mod
-    end
-
-    def self.create(name)
-      instance = InstanceCache.find(name)
-      instance || self.new(name)
     end
 
     def delete
