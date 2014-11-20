@@ -4,6 +4,8 @@ require 'thor'
 require 'colorize'
 require 'crafter'
 
+InstanceCache.load
+
 def message(meth, message, color: [], arrow_color: nil)
   message = [message].flatten.join("\n    ")
   message << "\n    >" if meth == :ask
@@ -44,10 +46,15 @@ end
 class Craft < Thor
   prepend Crafter::CLIHelpers
 
+  class << self
+    Crafter::FileSystem.base_directory_setup
+  end
+
   desc 'create NAME', 'Creates a new Crafter instance.'
   def create(name)
     @type = ask('Client or Server?', valid: ['client', 'server'])
     @minecraft = ask('Please specify Minecraft version')
+    instance = Instance.create(name)
   end
 
   desc 'clone', 'Clones a Crafter instance.'
